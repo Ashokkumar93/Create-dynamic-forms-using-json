@@ -19,8 +19,7 @@ npm install -g nodemon
 node seed.js
 nodemon app.js 
 
-##
--mongo
+## for mongo
 show dbs -- [show all databases on the server]
 use db  --[switch to current db]
 show collections -- [show all collectins on that database]
