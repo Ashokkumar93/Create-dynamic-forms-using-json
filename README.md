@@ -20,9 +20,15 @@ node seed.js
 nodemon app.js 
 
 ## for mongo
+
 show dbs -- [show all databases on the server]
+
 use db  --[switch to current db]
+
 show collections -- [show all collectins on that database]
+
 db.collectionname.find().pretty()[ gives the all documents in the collection]
+
 db.collectionname.insertOne()[insert new document in to the collection]
+
 db.collectionname.drop() [removes completely the collection]db
