@@ -14,9 +14,13 @@ mongo
 
 # cmd3
 npm install
-bower install 
+
+bower install
+
 npm install -g nodemon
+
 node seed.js
+
 nodemon app.js 
 
 ## for mongo
