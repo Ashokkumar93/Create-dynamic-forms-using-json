@@ -5,22 +5,21 @@
 1. Clone project form github.
 
 2. Check mongo is installed locally or not.(If not follow the installation guide from https://docs.mongodb.com/manual/installation/)
-
-3. 
-#cmd1
+ 
+# cmd1
 mongod 
 
-#cmd2
+# cmd2
 mongo
 
-#cmd3
+# cmd3
 npm install
 bower install 
 npm install -g nodemon
 node seed.js
 nodemon app.js 
 
-## ---------------------------
+##
 -mongo
 show dbs -- [show all databases on the server]
 use db  --[switch to current db]
