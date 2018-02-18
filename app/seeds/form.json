@@ -1,0 +1,113 @@
+{
+    "data":
+    {},
+    "schema":
+    {
+        "type": "object",
+        "properties":
+        {
+            "_id":
+            {
+                "type": "string",
+                "required": false
+            },
+            "name":
+            {
+                "type": "string",
+                "required": true
+            },
+            "age":
+            {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 99,
+                "required": true
+            },
+            "phone":
+            {
+                "type": "string",
+                "required": true
+            },
+            "city":
+            {
+                "type": "string",
+                "required": true
+            },
+            "state":
+            {
+                "type": "string"
+            },
+            "note":
+            {
+                "type": "string",
+                "required": true
+            }
+        }
+    },
+    "options":
+    {
+        "form":
+        {
+            "attributes":
+            {
+                "action": "/member/",
+                "method": "post"
+            },
+            "buttons":
+            {
+                "submit":
+                {},
+                "reset":
+                {}
+            }
+        },
+        "fields":
+        {
+            "_id":
+            {
+                "type": "text",
+                "label": "ID: (Use to update)",
+                "showMessages": false
+            },
+            "name":
+            {
+                "type": "text",
+                "label": "Name:",
+                "showMessages": true
+            },
+            "age":
+            {
+                "type": "number",
+                "label": "Age:",
+                "showMessages": true
+            },
+            "phone":
+            {
+                "type": "phone",
+                "label": "Phone:",
+                "showMessages": true
+            },
+            "city":
+            {
+                "type": "text",
+                "label": "City:",
+                "showMessages": true
+            },
+            "state":
+            {
+                "type": "state",
+                "label": "State:",
+                "showMessages": false
+            },
+            "note":
+            {
+                "type": "textarea",
+                "label": "comment",
+                "rows": 6,
+                "cols": 80
+            }
+
+        }
+    },
+    "view": "bootstrap-edit"
+}

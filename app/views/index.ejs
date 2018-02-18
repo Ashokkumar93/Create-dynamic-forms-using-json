@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Member Registration Form</title>
+    <!-- jQuery -->
+    <script type="text/javascript" src="bower_components/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- Handlebars -->
+    <script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
+    <!-- Alpaca -->
+    <script type="text/javascript" src="bower_components/alpaca/dist/alpaca/bootstrap/alpaca.js"></script>
+    <link type="text/css" href="bower_components/alpaca/dist/alpaca/bootstrap/alpaca.css" rel="stylesheet" />
+    <!-- AngularJS -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <!-- Font-Awesome -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div id="form" class="col-sm-6 col-xs-12 col-md-6 col-lg-6"></div>
+            <div ng-app="memberApp" ng-controller="memberController" id="table" class="col-sm-6 col-xs-12 col-md-6 col-lg-6">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zipcode</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="member in members" class="members">
+                            <td> {{member._id}}</td>
+                            <td> {{member.name}}</td>
+                            <td>{{member.age}}</td>
+                            <td>{{member.phone}}</td>
+                            <td>{{member.city}}</td>
+                            <td>{{member.state}}</td>
+                            <td>{{member.zipcode}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-xs deleteItem" data-member="{{member}}">Delete</button>
+                                <button class="btn btn-primary btn-xs updateItem" data-member="{{member}}">Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+    var jsonResults = <%- JSON.stringify(results) %>
+
+    // Creating the form
+
+    $(document).ready(function() {
+
+        $.ajax({
+            type: "GET",
+            url: "/jsonform",
+            success: function(data) {
+                console.log(data);
+                var parsedData = JSON.parse(data[0].form);
+
+                $("#form").alpaca(Object.assign(parsedData, {
+                    "postRender": function() {}
+                }));
+            }
+        });
+
+
+
+        // Deleting members
+
+        $(".deleteItem").click(function() {
+            var that = $(this);
+            var data = $(this).data("member");
+            $.ajax({
+                type: "DELETE",
+                url: "/member/",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function() {
+                    that.closest("tr").remove();
+                }
+            });
+        });
+
+        //Updating members
+
+        $(".updateItem").click(function() {
+            var that = $(this);
+            var data = $(this).data("member");
+            $("#alpaca3").val(data._id);
+            $("#alpaca4").val(data.name);
+            $("#alpaca5").val(data.age);
+            $("#alpaca6").val(data.phone);
+            $("#alpaca7").val(data.city);
+            $("#alpaca8").val(data.state);
+            $("#alpaca9").val(data.zipcode);
+
+        });
+
+    });
+
+
+
+
+
+
+    // Angular app to display the table
+
+    var app = angular.module('memberApp', []);
+    app.controller('memberController', function($scope) {
+        $scope.members = <%- JSON.stringify(results) %>;
+    });
+    </script>
+</body>
+
+</html>
